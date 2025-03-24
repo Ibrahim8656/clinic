@@ -1,0 +1,2 @@
+const String supabase_Url="https://rdwbrvbbdumctnnbcdwl.supabase.co";
+const String anonKey="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJkd2JydmJiZHVtY3RubmJjZHdsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI1NTkxODUsImV4cCI6MjA1ODEzNTE4NX0.wl3NnFlExxOBZKUpaGN_7CqDVmEfD2DLY22nTesKg-o";
