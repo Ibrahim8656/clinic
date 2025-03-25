@@ -2,7 +2,9 @@ import 'package:clinic/core/blocobserver/bloc_observer.dart';
 import 'package:clinic/core/strings/strings.dart';
 import 'package:clinic/features/reception/data/repository/repository.dart';
 import 'package:clinic/features/reception/domain/usecases/add_patient_usecase.dart';
+import 'package:clinic/features/reception/domain/usecases/getAppoiners.dart';
 import 'package:clinic/features/reception/domain/usecases/get_patinet_data.dart';
+import 'package:clinic/features/reception/domain/usecases/makeAppointmentusecase.dart';
 import 'package:clinic/features/reception/presentation/cubit/reception_cubit.dart';
 import 'package:clinic/features/reception/presentation/screens/reception_screen.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +33,9 @@ class MyApp extends StatelessWidget {
             final repository = ReceptionRepositoryImpl(supabaseClient);
             final usecase = AddPatientUsecase(repository);
             final usecase2 = GetPatinetData(repository);
-            return ReceptionCubit(usecase, usecase2)..fetchPatients();
+            final usecase3=Makeappointmentusecase(repository);
+            final usecase4=GetappoinersUsecase(repository);
+            return ReceptionCubit(usecase, usecase2,usecase3,usecase4)..fetchPatients()..fetchAppointers();
           },
         ),
       ],

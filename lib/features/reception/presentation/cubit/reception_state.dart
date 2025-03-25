@@ -1,3 +1,4 @@
+import 'package:clinic/features/reception/domain/entity/appointment.dart';
 import 'package:clinic/features/reception/domain/entity/entity.dart';
 import 'package:equatable/equatable.dart';
 abstract class ReceptionState extends Equatable {
@@ -24,7 +25,7 @@ class AddPatientFailure extends ReceptionState {
 class PatientLoading extends ReceptionState {}
 
 class PatientLoaded extends ReceptionState {
-  final List<Patient> patients;
+  final List<Patientres> patients;
 
   PatientLoaded(this.patients);
 }
@@ -34,4 +35,38 @@ class PatientError extends ReceptionState {
 
   PatientError(this.message);
 }
+class appointmentLoading extends ReceptionState {}
 
+class appointmentLoaded extends ReceptionState {
+
+}
+
+class appointmentError extends ReceptionState {
+  final String message;
+
+ appointmentError(this.message);
+}
+class AppointmetsLoading extends ReceptionState {}
+
+class AppointmetsLoaded extends ReceptionState {
+  final List<Appointment> patients;
+
+  AppointmetsLoaded(this.patients);
+}
+
+class AppointmetsError extends ReceptionState {
+  final String message;
+
+  AppointmetsError(this.message);
+}
+class searchloading extends ReceptionState{}
+class searchsuccess extends ReceptionState {
+  final List<Patientres> searchedpatients;
+
+  searchsuccess(this.searchedpatients);
+}
+class searchError extends ReceptionState {
+  final String message;
+
+  searchError(this.message);
+}

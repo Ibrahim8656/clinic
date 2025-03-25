@@ -1,3 +1,4 @@
+import 'package:clinic/features/reception/domain/entity/appointment.dart';
 import 'package:clinic/features/reception/domain/entity/entity.dart';
 import 'package:clinic/features/reception/domain/repository/repository.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -33,7 +34,7 @@ class ReceptionRepositoryImpl implements ReceptionRepository {
   }
   
  @override
-Future<List<Patient>> getPatients() async {
+Future<List<Patientres>> getPatients() async {
   try {
     final data = await Supabase.instance.client.from('patients')
   .select();
@@ -41,12 +42,46 @@ Future<List<Patient>> getPatients() async {
   
     final List<Map<String, dynamic>> dataa = data;
 
-    return dataa.map((patientData) => Patient.fromMap(patientData)).toList();
+    return dataa.map((patientData) => Patientres.fromMap(patientData)).toList();
   } catch (e) {
     print("Error fetching patients: $e");
     rethrow;
   }
 }
+
+  @override
+  Future<void> makeAppointment(Appointment appointment)async {
+   try{
+    final Map<String,dynamic>Appointment_dada=appointment.toMap();
+     final response = await _supabaseClient
+          .from('appointments')
+          .insert([Appointment_dada])  // Insert the patient data
+          .select()
+          .single();
+          if(response.isEmpty){
+            print("nodata");
+          }
+   }catch(e){
+    print(e.toString());
+    throw Exception('Failed to make appointment');
+   }
+   
+  }
+  
+  @override
+  Future<List<Appointment>> getAppointers()async {
+  try {
+    final data = await Supabase.instance.client.from('appointments')
+  .select();
+
+    final List<Map<String, dynamic>> dataa = data;
+
+    return dataa.map((patientData) => Appointment.fromMap(patientData)).toList();
+  } catch (e) {
+    print("Error fetching patients: $e");
+    rethrow;
+  }
+  }
 
 }
 

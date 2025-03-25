@@ -1,5 +1,9 @@
 import 'package:clinic/core/colos/colors.dart';
+import 'package:clinic/core/widgets/Appointers_item.dart';
+import 'package:clinic/core/widgets/add_clint.dart';
 import 'package:clinic/core/widgets/custom_text_fild.dart';
+import 'package:clinic/core/widgets/patient_Item.dart';
+import 'package:clinic/features/reception/domain/entity/appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:clinic/features/reception/presentation/cubit/reception_cubit.dart';
@@ -16,12 +20,14 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
   final _genderController = TextEditingController();
   final _addressController = TextEditingController();
   final _PhoneController = TextEditingController();
+  final _Searchcontroller = TextEditingController();
   final _jobController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  List<Appointment>patients=[];
 
   @override
   Widget build(BuildContext context) {
-    double pading = MediaQuery.sizeOf(context).width * .05;
+    double padding = MediaQuery.sizeOf(context).width * .05;
     return Scaffold(
       appBar: AppBar(
         title: Center(
@@ -36,178 +42,119 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
         ),
         backgroundColor: primarycolor,
       ),
-      body: Container(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: pading, bottom: 25, top: 25),
-                child: Row(
+      body: Row(
+        children: [
+          Add_clint(
+            padding: padding,
+            formKey: _formKey,
+            nameController: _nameController,
+            PhoneController: _PhoneController,
+            ageController: _ageController,
+            genderController: _genderController,
+            jobController: _jobController,
+            addressController: _addressController,
+          ),
+          SizedBox(width: 50),
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding: EdgeInsets.only(top: 25, right: padding),
+              child: Container(
+                height: MediaQuery.sizeOf(context).height * .9,
+                child: Column(
                   children: [
+                    Text(
+                      "المواعيد",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
                     Expanded(
-                      flex: 1,
-                      child: Container(
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "ْاضافه عميل",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      child: BlocBuilder<ReceptionCubit, ReceptionState>(
+                        builder: (context, state) {
+                          if (state is AppointmetsLoaded) {
+                             patients=state.patients;
+                            return Appoiner_Item(patients: patients);
+                          }else if(patients.isNotEmpty){
+                            return Appoiner_Item(patients: patients);
+                          }
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 100.0),
+                            child: Text(
+                              "Loading...",
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
-                              SizedBox(height: 20),
-                              custom_text_fild(
-                                Controller: _nameController,
-                                labelText: "الاسم",
-                                prefixIcon: Icons.person,
-                                validatemessage: 'برجاء ادخال الاسم ',
-                              ),
-                              SizedBox(height: 20),
-                              custom_text_fild(
-                                Controller: _PhoneController,
-                                labelText: "رقم الهاتف",
-                                prefixIcon: Icons.phone,
-                                validatemessage: 'برجاءادخال رقم الهاتف',
-                              ),
-                              SizedBox(height: 20),
-                              custom_text_fild(
-                                Controller: _ageController,
-                                labelText: "العمر",
-                                prefixIcon: Icons.numbers_rounded,
-                                validatemessage: 'برجاء اخال العمر',
-                              ),
-                              SizedBox(height: 20),
-                              custom_text_fild(
-                                Controller: _genderController,
-                                labelText: "النوع",
-                                prefixIcon: Icons.person,
-                                validatemessage: 'برجاء ادخال النوع ',
-                              ),
-                              SizedBox(height: 20),
-                              custom_text_fild(
-                                Controller: _jobController,
-                                labelText: "الوظيفه",
-                                prefixIcon: Icons.work,
-                                validatemessage: 'برجاء ادخال الوظيفه',
-                              ),
-                              SizedBox(height: 20),
-                              custom_text_fild(
-                                Controller: _addressController,
-                                labelText: "العنوان",
-                                prefixIcon: Icons.location_city,
-                                validatemessage: 'برجاء ادخال العنوان',
-                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 20),
 
-                              SizedBox(height: 30),
-                              BlocConsumer<ReceptionCubit, ReceptionState>(
-                                listener: (context, state) {
-                                  if (state is AddPatientSuccess) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text('تمت الاضافه بنجاح'),
-                                        backgroundColor: Colors.green,
-                                      ),
-                                    );
-                                  } else if (state is AddPatientFailure) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(state.message),
-                                        backgroundColor: Colors.red,
-                                      ),
-                                    );
-                                  }
-                                },
-                                builder: (context, state) {
-                                  if (state is AddPatientLoading) {
-                                    return CircularProgressIndicator();
-                                  }
-                                  return InkWell(
-                                    onTap: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        final name = _nameController.text;
-                                        final age = int.parse(
-                                          _ageController.text,
-                                        );
-                                        final gender = _genderController.text;
-                                        final phone = _PhoneController.text;
-                                        final job = _jobController.text;
-                                        final address = _addressController.text;
-
-                                        context
-                                            .read<ReceptionCubit>()
-                                            .addPatient(
-                                              name,
-                                              age,
-                                              gender,
-                                              address,
-                                              phone,
-                                              job,
-                                            );
-                                     ;
-                                      context
-                                            .read<ReceptionCubit>().fetchPatients();
-                                     }
-                                      _nameController.clear();
-                                      _ageController.clear();
-                                      _addressController.clear();
-                                      _PhoneController.clear();
-                                      _jobController.clear();
-                                      _genderController.clear();
-                                    },
-                                    child: Container(
-                                      width: 200,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        color: primarycolor,
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "حفظ",
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ],
+                    Text(
+                      "جميع العملاء",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        bottom: 10,
+                        right: 50,
+                      ),
+                      child: TextField(
+                        controller: _Searchcontroller,
+                        onChanged: (searchCharcter) {
+                          ReceptionCubit.get(
+                            context,
+                          ).AddSearchedCharcterTolist(searchCharcter);
+                        },
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                           ),
+                          hintText: 'search',
+                          prefixIcon: Icon(Icons.search),
                         ),
                       ),
                     ),
                     Expanded(
-                      flex: 2,
-                      child: Container(
-                        child: Column(children: [
-                          
-                          Text("Make an appointment"),
-                          
-                          BlocBuilder<ReceptionCubit, ReceptionState>(
-                            builder: (context, state) {
-                             if(state is PatientLoaded){
-                              return Text("${state.patients[2].name}");
-                             }return Text("data");
-                             
-                            },
-                          )
-                          ]),
+                      child: BlocBuilder<ReceptionCubit, ReceptionState>(
+                        builder: (context, state) {
+                          if (
+                            state is searchsuccess
+                          ) {
+                            return patient_Item(
+                              patients: state.searchedpatients ,
+                            );
+                          }else if(ReceptionCubit.get(context).AllPatients.isNotEmpty){
+                            return patient_Item(patients: ReceptionCubit.get(context).AllPatients);
+                          }else
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 100.0),
+                            child: Text(
+                              "Loading...",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

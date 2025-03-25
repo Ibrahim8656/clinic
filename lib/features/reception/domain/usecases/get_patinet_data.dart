@@ -5,7 +5,7 @@ class GetPatinetData {
   final ReceptionRepository receptionRepository;
 
   GetPatinetData(this.receptionRepository);
-  Future<List<Patient>> execute()async{
+  Future<List<Patientres>> execute()async{
     return await receptionRepository.getPatients();
   }
 
