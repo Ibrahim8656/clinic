@@ -1,4 +1,5 @@
 class Appointment {
+  final int id;
   final String veisit_type;
   final String name;
     final int age;
@@ -7,7 +8,8 @@ class Appointment {
   final String phone;
   final String job;
 
-  Appointment( {
+  Appointment(  {
+    required this.id,
    required this.name,
    required this.age,
    required this.gender, 
@@ -20,6 +22,7 @@ class Appointment {
 
   Map<String, dynamic> toMap() {
     return {
+      'id':id,
       'name':name,
       'visit_type': veisit_type,
       'age': age,
@@ -32,6 +35,7 @@ class Appointment {
   }
     factory Appointment.fromMap(Map<String, dynamic> map) {
   return Appointment(
+    id: map['id'],
     name: map['name']?.toString() ?? '',  // Convert to String if it's not null
     age: map['age'] is int ? map['age'] as int : (map['age'] as double).toInt(),
     gender: map['gender']?.toString() ?? '',  // Convert to String if it's not null

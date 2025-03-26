@@ -29,11 +29,10 @@ class patient_Item extends StatelessWidget {
             onSelected: (String value) {
               // Handle the selected option
               if (value == 'حجزكشف') {
-              ReceptionCubit.get(context).makeAppointment(veisit_type: 'كشف', gender:patients[index].gender, age: patients[index].age, address: patients[index].address, phone:patients[index].phone, job: patients[index].job, name: patients[index].name);
+              ReceptionCubit.get(context).makeAppointment(veisit_type: 'كشف', gender:patients[index].gender, age: patients[index].age, address: patients[index].address, phone:patients[index].phone, job: patients[index].job, name: patients[index].name, id: 1);
               
-              } else if (value == 'option2') {
-                // Do something for option 2
-                print('Option 2 selected');
+              } else if (value == 'ازاله') {
+                ReceptionCubit.get(context).deleteClint(id: patients[index].id);
               }
             },
             itemBuilder:

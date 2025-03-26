@@ -1,7 +1,6 @@
 import 'package:clinic/core/colos/colors.dart';
-import 'package:clinic/core/widgets/Appointers_item.dart';
 import 'package:clinic/core/widgets/add_clint.dart';
-import 'package:clinic/core/widgets/custom_text_fild.dart';
+import 'package:clinic/core/widgets/appointment_itme.dart';
 import 'package:clinic/core/widgets/patient_Item.dart';
 import 'package:clinic/features/reception/domain/entity/appointment.dart';
 import 'package:flutter/material.dart';
@@ -76,9 +75,9 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                         builder: (context, state) {
                           if (state is AppointmetsLoaded) {
                              patients=state.patients;
-                            return Appoiner_Item(patients: patients);
+                            return Appointment_Itme(patients: patients);
                           }else if(patients.isNotEmpty){
-                            return Appoiner_Item(patients: patients);
+                            return Appointment_Itme(patients: patients);
                           }
                           return Padding(
                             padding: const EdgeInsets.only(top: 100.0),
