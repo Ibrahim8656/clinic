@@ -75,9 +75,9 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                         builder: (context, state) {
                           if (state is AppointmetsLoaded) {
                              patients=state.patients;
-                            return Appointment_Itme(patients: patients);
+                            return Appointment_Itme(patients: patients, isdoctor: false,);
                           }else if(patients.isNotEmpty){
-                            return Appointment_Itme(patients: patients);
+                            return Appointment_Itme(patients: patients, isdoctor: false,);
                           }
                           return Padding(
                             padding: const EdgeInsets.only(top: 100.0),

@@ -1,5 +1,9 @@
 import 'package:clinic/core/blocobserver/bloc_observer.dart';
 import 'package:clinic/core/strings/strings.dart';
+import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
+import 'package:clinic/features/doctor/presentation/screens/doctor_home.dart';
+import 'package:clinic/features/doctor/presentation/screens/doctor_screen.dart';
+import 'package:clinic/features/doctor/presentation/screens/ne.dart';
 import 'package:clinic/features/reception/data/repository/repository.dart';
 import 'package:clinic/features/reception/domain/usecases/add_patient_usecase.dart';
 import 'package:clinic/features/reception/domain/usecases/cancel_appointment.dart';
@@ -29,6 +33,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+
+        BlocProvider(
+          create: (context) => DoctorCubit(),
+          child: Container(),
+        ),
         BlocProvider(
           create: (context) {
             final supabaseClient = Supabase.instance.client;
@@ -43,7 +52,7 @@ class MyApp extends StatelessWidget {
           },
         ),
       ],
-      child: MaterialApp(home: ReceptionScreen()),
+      child: MaterialApp(home: DoctorHome()),
     );
   }
 }
