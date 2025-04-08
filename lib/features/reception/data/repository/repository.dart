@@ -74,10 +74,7 @@ class ReceptionRepositoryImpl implements ReceptionRepository {
   Future<List<Appointment>> getAppointers() async {
     try {
       final data = await Supabase.instance.client.from('appointments').select();
-
-      final List<Map<String, dynamic>> dataa = data;
-
-      return dataa
+      return data
           .map((patientData) => Appointment.fromMap(patientData))
           .toList();
     } catch (e) {

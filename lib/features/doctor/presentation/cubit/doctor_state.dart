@@ -28,6 +28,34 @@ class DeleteTreatmentfailuer extends DoctorState {
 
   DeleteTreatmentfailuer(this.errormessage);
 }
+class AddprescriptionLoading extends DoctorState {}
+class  Addprescriptionsuccess extends DoctorState {}
+
+class  Addprescriptionfailuer extends DoctorState {
+  final String errormessage;
+
+   Addprescriptionfailuer(this.errormessage);
+}
 class selectappointmentsorpateintsstate extends DoctorState{}
 class selectappointmentsorpateintsstateLoading extends DoctorState{}
 class selectappointmentsorpateintsstateerror extends DoctorState{}
+class AddPrescriptiondatatstate extends DoctorState{}
+class DeletePrescriptiondatatstate extends DoctorState{}
+
+class LoadingAddPreparedprescriptionState extends DoctorState{}
+class SuccessAddPreparedprescriptionstate extends DoctorState{}
+class ErrorAddPreparedprescriptionstate extends DoctorState{
+  final String errormessage;
+
+  ErrorAddPreparedprescriptionstate(this.errormessage);
+
+}
+class LoadingFetchPreparedprescriptionState extends DoctorState{}
+class SuccessFetchPreparedprescriptionstate extends DoctorState{}
+class ErrorFetchPreparedprescriptionstate extends DoctorState{
+  final String errormessage;
+
+  ErrorFetchPreparedprescriptionstate(this.errormessage);
+
+}
+class CollectPreparedprescriptionState extends DoctorState{}

@@ -42,6 +42,7 @@ class Appointment_Itme extends StatelessWidget {
                 Spacer(),isdoctor? InkWell(
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>DoctorScreen(patient: patients[index],)));
+                      ReceptionCubit.get(context).cancelAppointment(id:patients[index].id );
                   },
                   child: Container(decoration: BoxDecoration(
                     color: primarycolor,
@@ -54,8 +55,7 @@ class Appointment_Itme extends StatelessWidget {
                   )):
                 Row(children: [
                   cancel_bottom(patients: patients, color: Color.fromARGB(255, 252, 77, 65), text: 'الغاء', index: index,),
-                SizedBox(width: 20,),
-                cancel_bottom(patients: patients, color:Colors.green, text: 'تم', index: index,),
+                
                 ],)
                   
               ],

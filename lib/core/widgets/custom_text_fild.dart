@@ -1,3 +1,4 @@
+import 'package:clinic/core/colos/colors.dart';
 import 'package:flutter/material.dart';
 
 class custom_text_fild extends StatelessWidget {
@@ -9,7 +10,7 @@ class custom_text_fild extends StatelessWidget {
   final TextEditingController Controller;
   final bool? obscureText;
   final String labelText,validatemessage;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class custom_text_fild extends StatelessWidget {
         
         border:OutlineInputBorder(
         borderRadius: BorderRadius.circular(10)
-      ) ,labelText: labelText,prefixIcon: Icon(prefixIcon)),
+      ) ,labelText: labelText,prefixIcon: Icon(prefixIcon??null,color: primarycolor,)),
       
     );
   }

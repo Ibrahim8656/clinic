@@ -119,7 +119,7 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           hintText: 'search',
-                          prefixIcon: Icon(Icons.search),
+                          prefixIcon: Icon(Icons.search,color: primarycolor,),
                         ),
                       ),
                     ),
@@ -130,10 +130,10 @@ class _ReceptionScreenState extends State<ReceptionScreen> {
                             state is searchsuccess
                           ) {
                             return patient_Item(
-                              patients: state.searchedpatients ,
+                              patients: state.searchedpatients, isdoctor: false ,
                             );
                           }else if(ReceptionCubit.get(context).AllPatients.isNotEmpty){
-                            return patient_Item(patients: ReceptionCubit.get(context).AllPatients);
+                            return patient_Item(patients: ReceptionCubit.get(context).AllPatients, isdoctor: false,);
                           }else
                           return Padding(
                             padding: const EdgeInsets.only(top: 100.0),

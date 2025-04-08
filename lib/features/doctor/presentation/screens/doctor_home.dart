@@ -2,6 +2,8 @@ import 'package:clinic/core/colos/colors.dart';
 import 'package:clinic/core/widgets/appointment_itme.dart';
 import 'package:clinic/core/widgets/patient_Item.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
+import 'package:clinic/features/doctor/presentation/widgets/logo_and_chois.dart';
+import 'package:clinic/features/doctor/presentation/widgets/welcome_doc.dart';
 import 'package:clinic/features/reception/domain/entity/appointment.dart';
 import 'package:clinic/features/reception/presentation/cubit/reception_cubit.dart';
 import 'package:clinic/features/reception/presentation/cubit/reception_state.dart';
@@ -17,126 +19,22 @@ class DoctorHome extends StatelessWidget {
     final _Searchcontroller = TextEditingController();
     return BlocConsumer<DoctorCubit, DoctorState>(
       listener: (context, state) {
-        // TODO: implement listener
+      if(state is AppointmetsLoaded){
+        print("ddddddddddddddddddddddddddddd");
+      }
       },
       builder: (context, state) {
         List<Appointment> patients = [];
         return Scaffold(
           body: Row(
             children: [
-              Expanded(
-                flex: 1,
-                child: Container(
-                  decoration: BoxDecoration(color: primarycolor),
-                  child: Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: Image.asset('assets/images/clinic_logo.png'),
-                        ),
-                        Spacer(),
-                        InkWell(
-                          onTap: () {
-                            DoctorCubit.get(
-                              context,
-                            ).selectappointmentsorpateints(boo: true);
-                          },
-                          child: Container(
-                            height: 55,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color:
-                                  DoctorCubit.get(context).isappointment
-                                      ? secondrycolor
-                                      : null,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Appointments",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        InkWell(
-                          onTap: () {
-                            DoctorCubit.get(
-                              context,
-                            ).selectappointmentsorpateints(boo: false);
-                            print(DoctorCubit.get(context).isappointment);
-                          },
-                          child: Container(
-                            height: 55,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color:
-                                  DoctorCubit.get(context).isappointment
-                                      ? null
-                                      : secondrycolor,
-                            ),
-                            child: Center(
-                              child: Text(
-                                "All Patients",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              logo_chois(),
               Expanded(
                 flex: 3,
                 child: Container(
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 40,
-                          vertical: 20,
-                        ),
-                        child: Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Welcome,',
-                                  style: TextStyle(
-                                    fontSize: 50,
-                                    fontWeight: FontWeight.bold,
-                                    color: primarycolor,
-                                  ),
-                                ),
-                                Text(
-                                  'Dr/ mohamed',
-                                  style: TextStyle(
-                                    fontSize: 50,
-                                    fontWeight: FontWeight.bold,
-                                    color: primarycolor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                      Welcome_doc(),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 40.0),
                         child: Container(
@@ -175,10 +73,16 @@ class DoctorHome extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                       horizontal: 40.0,
                                     ),
-                                    child: Appointment_Itme(patients: patients, isdoctor: true,),
+                                    child: Appointment_Itme(
+                                      patients: patients,
+                                      isdoctor: true,
+                                    ),
                                   );
                                 } else if (patients.isNotEmpty) {
-                                  return Appointment_Itme(patients: patients, isdoctor: true,);
+                                  return Appointment_Itme(
+                                    patients: patients,
+                                    isdoctor: true,
+                                  );
                                 }
                                 return Padding(
                                   padding: const EdgeInsets.only(top: 100.0),
@@ -203,7 +107,7 @@ class DoctorHome extends StatelessWidget {
                                     right: 50,
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: 40.0 ),
+                                    padding: const EdgeInsets.only(left: 40.0),
                                     child: TextField(
                                       controller: _Searchcontroller,
                                       onChanged: (searchCharcter) {
@@ -215,7 +119,9 @@ class DoctorHome extends StatelessWidget {
                                       },
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
                                         ),
                                         hintText: 'search',
                                         prefixIcon: Icon(Icons.search),
@@ -231,21 +137,27 @@ class DoctorHome extends StatelessWidget {
                                     builder: (context, state) {
                                       if (state is searchsuccess) {
                                         return Padding(
-                                          padding: const EdgeInsets.symmetric( horizontal: 40.0,),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 40.0,
+                                          ),
                                           child: patient_Item(
                                             patients: state.searchedpatients,
+                                            isdoctor: true,
                                           ),
                                         );
                                       } else if (ReceptionCubit.get(
                                         context,
                                       ).AllPatients.isNotEmpty) {
                                         return Padding(
-                                          padding: const EdgeInsets.symmetric( horizontal: 40.0,),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 40.0,
+                                          ),
                                           child: patient_Item(
                                             patients:
                                                 ReceptionCubit.get(
                                                   context,
                                                 ).AllPatients,
+                                            isdoctor: true,
                                           ),
                                         );
                                       } else

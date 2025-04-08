@@ -1,5 +1,10 @@
 import 'package:clinic/core/blocobserver/bloc_observer.dart';
 import 'package:clinic/core/strings/strings.dart';
+import 'package:clinic/features/doctor/data/repository/repository.dart';
+import 'package:clinic/features/doctor/domain/repository/repository.dart';
+import 'package:clinic/features/doctor/domain/usecases/add_preparedprescription_usecase.dart';
+import 'package:clinic/features/doctor/domain/usecases/add_prescription_usecase.dart';
+import 'package:clinic/features/doctor/domain/usecases/get_prerpared_prescription.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
 import 'package:clinic/features/doctor/presentation/screens/doctor_home.dart';
 import 'package:clinic/features/doctor/presentation/screens/doctor_screen.dart';
@@ -33,10 +38,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-
         BlocProvider(
-          create: (context) => DoctorCubit(),
-          child: Container(),
+          create: (context) {
+            final supabaseClient = Supabase.instance.client;
+            return DoctorCubit(
+              AddPreparedprescriptionUsecase(
+                DoctorRepositoryimpl(supabaseClient),
+              ),
+              GetPrerparedPrescriptionUsecase(
+                DoctorRepositoryimpl(supabaseClient),
+              ),
+              addPrescriptionUsecase: AddPrescriptionUsecase(
+                DoctorRepositoryimpl(supabaseClient),
+              ),
+            )..Fetch_preparedPrescruotions();
+          },
         ),
         BlocProvider(
           create: (context) {
@@ -44,11 +60,20 @@ class MyApp extends StatelessWidget {
             final repository = ReceptionRepositoryImpl(supabaseClient);
             final usecase = AddPatientUsecase(repository);
             final usecase2 = GetPatinetData(repository);
-            final usecase3=Makeappointmentusecase(repository);
-            final usecase4=GetappoinersUsecase(repository);
-            final usecase5=DeleteClintUsecase(repository);
-            final usecase6=CancelAppointmentusecase(repository);
-            return ReceptionCubit(usecase, usecase2,usecase3,usecase4,usecase5,usecase6)..fetchPatients()..fetchAppointers();
+            final usecase3 = Makeappointmentusecase(repository);
+            final usecase4 = GetappoinersUsecase(repository);
+            final usecase5 = DeleteClintUsecase(repository);
+            final usecase6 = CancelAppointmentusecase(repository);
+            return ReceptionCubit(
+                usecase,
+                usecase2,
+                usecase3,
+                usecase4,
+                usecase5,
+                usecase6,
+              )
+              ..fetchPatients()
+              ..fetchAppointers();
           },
         ),
       ],
