@@ -22,7 +22,7 @@ class Appointment_Itme extends StatelessWidget {
         separatorBuilder: (context, index) => Divider(),
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.only(left: 10.0,right: 50,top: 15,bottom: 15),
+            padding:  EdgeInsets.only(left: MediaQuery.sizeOf(context).width * 0.035,right: MediaQuery.sizeOf(context).width * 0.035,top: MediaQuery.sizeOf(context).width * 0.02,bottom: MediaQuery.sizeOf(context).width * 0.01,),
             child: Row(
               children: [
                 CircleAvatar(
@@ -49,7 +49,7 @@ class Appointment_Itme extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)
                   ),
                   child: Center(child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding:  EdgeInsets.all(MediaQuery.sizeOf(context).width * 0.008),
                     child: Text("examine",style: TextStyle(color: Colors.white),),
                   )),
                   )):

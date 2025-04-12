@@ -9,9 +9,9 @@ class Welcome_doc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 40,
-        vertical: 20,
+      padding:  EdgeInsets.symmetric(
+        horizontal: MediaQuery.sizeOf(context).width * 0.035,
+        vertical: MediaQuery.sizeOf(context).width * 0.030,
       ),
       child: Row(
         children: [
@@ -21,7 +21,7 @@ class Welcome_doc extends StatelessWidget {
               Text(
                 'Welcome,',
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: MediaQuery.sizeOf(context).width * 0.035,
                   fontWeight: FontWeight.bold,
                   color: primarycolor,
                 ),
@@ -29,7 +29,7 @@ class Welcome_doc extends StatelessWidget {
               Text(
                 'Dr/ mohamed',
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: MediaQuery.sizeOf(context).width * 0.035,
                   fontWeight: FontWeight.bold,
                   color: primarycolor,
                 ),

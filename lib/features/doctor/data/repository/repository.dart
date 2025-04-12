@@ -1,8 +1,6 @@
-import 'dart:convert';
 
 import 'package:clinic/features/doctor/domain/entity/prescription.dart';
 import 'package:clinic/features/doctor/domain/repository/repository.dart';
-import 'package:clinic/features/doctor/presentation/widgets/prepeard_prescriptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class DoctorRepositoryimpl implements DoctorRepository {

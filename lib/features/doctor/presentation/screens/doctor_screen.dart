@@ -1,8 +1,5 @@
 import 'package:clinic/core/colos/colors.dart';
 import 'package:clinic/core/widgets/box_.dart';
-import 'package:clinic/core/widgets/custom_bottom.dart';
-import 'package:clinic/core/widgets/custom_text_fild.dart';
-import 'package:clinic/core/widgets/row_box.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
 import 'package:clinic/features/doctor/presentation/widgets/add_prepered_prescrioption.dart';
 import 'package:clinic/features/doctor/presentation/widgets/add_prescription.dart';
@@ -10,7 +7,7 @@ import 'package:clinic/features/doctor/presentation/widgets/patientinfo_more.dar
 import 'package:clinic/features/doctor/presentation/widgets/prepeard_prescriptions.dart';
 import 'package:clinic/features/doctor/presentation/widgets/table.dart';
 import 'package:clinic/features/reception/domain/entity/appointment.dart';
-import 'package:dropdown_search/dropdown_search.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';

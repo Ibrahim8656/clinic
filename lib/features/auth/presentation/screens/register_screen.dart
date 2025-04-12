@@ -85,7 +85,7 @@ class RegisterPage extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Loginscreen(),
+                                builder: (context) => Loginscreen(isadoctor: false,),
                               ),
                             );
                           } else if (state is AuthFailure) {

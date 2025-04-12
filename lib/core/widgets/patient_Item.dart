@@ -1,3 +1,4 @@
+import 'package:clinic/core/widgets/show_snack_bar.dart';
 import 'package:clinic/features/reception/domain/entity/entity.dart';
 import 'package:clinic/features/reception/presentation/cubit/reception_cubit.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,7 @@ class patient_Item extends StatelessWidget {
               onSelected: (String value) {
                 // Handle the selected option
                 if (value == 'make appointment') {
+                  showSnackBar(context, "Success", Colors.green);
                 ReceptionCubit.get(context).makeAppointment(veisit_type: 'follow_up', gender:patients[index].gender, age: patients[index].age, address: patients[index].address, phone:patients[index].phone, job: patients[index].job, name: patients[index].name, id: patients[index].id);
                 
                 } else if (value == 'remove') {

@@ -14,15 +14,16 @@ class logo_chois extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(color: primarycolor),
         child: Padding(
-          padding: const EdgeInsets.all(25.0),
+          padding:  EdgeInsets.all(MediaQuery.sizeOf(context).width * 0.015,),
           child: Column(
             children: [
               Container(
+                height: MediaQuery.sizeOf(context).height * 0.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
-                child: Image.asset('assets/images/clinic_logo.png'),
+                child: Image.asset('assets/images/clinic_logo.png',height:  MediaQuery.sizeOf(context).height * 0.4,),
               ),
               Spacer(),
               InkWell(
@@ -32,7 +33,7 @@ class logo_chois extends StatelessWidget {
                   ).selectappointmentsorpateints(boo: true);
                 },
                 child: Container(
-                  height: 55,
+                  height: MediaQuery.sizeOf(context).height * 0.08,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color:
@@ -44,7 +45,7 @@ class logo_chois extends StatelessWidget {
                     child: Text(
                       "Appointments",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: MediaQuery.sizeOf(context).height * 0.026,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -52,7 +53,7 @@ class logo_chois extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
               InkWell(
                 onTap: () {
                   DoctorCubit.get(
@@ -60,7 +61,7 @@ class logo_chois extends StatelessWidget {
                   ).selectappointmentsorpateints(boo: false);
                 },
                 child: Container(
-                  height: 55,
+                  height: MediaQuery.sizeOf(context).height * 0.08,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color:
@@ -72,7 +73,7 @@ class logo_chois extends StatelessWidget {
                     child: Text(
                       "All Patients",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: MediaQuery.sizeOf(context).height * 0.026,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

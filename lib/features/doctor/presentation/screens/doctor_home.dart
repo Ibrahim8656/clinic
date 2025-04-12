@@ -36,7 +36,7 @@ class DoctorHome extends StatelessWidget {
                     children: [
                       Welcome_doc(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                        padding:  EdgeInsets.symmetric(horizontal: MediaQuery.sizeOf(context).width * 0.035,),
                         child: Container(
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 236, 236, 236),
@@ -54,7 +54,7 @@ class DoctorHome extends StatelessWidget {
                                   style: TextStyle(
                                     color: primarycolor,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 25,
+                                    fontSize: MediaQuery.sizeOf(context).width * 0.02,
                                   ),
                                 ),
                               ),

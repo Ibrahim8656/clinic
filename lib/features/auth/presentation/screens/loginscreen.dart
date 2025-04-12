@@ -1,17 +1,17 @@
-
 import 'package:clinic/core/widgets/custom_text_fild.dart';
 import 'package:clinic/core/widgets/show_snack_bar.dart';
 import 'package:clinic/features/auth/data/repository/repository.dart';
 import 'package:clinic/features/auth/domain/usecases/login_usecase.dart';
 import 'package:clinic/features/auth/domain/usecases/register_usecase.dart';
 import 'package:clinic/features/auth/presentation/cubit/auth_cubit.dart';
+import 'package:clinic/features/doctor/presentation/screens/doctor_home.dart';
 import 'package:clinic/features/reception/presentation/screens/reception_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Loginscreen extends StatelessWidget {
-  const Loginscreen({super.key, });
-  final bool isadoctor=true;
+  const Loginscreen({super.key, required this.isadoctor, });
+  final bool isadoctor;
   @override
   Widget build(BuildContext context) {
     TextEditingController _emailController = TextEditingController();
@@ -27,7 +27,7 @@ class Loginscreen extends StatelessWidget {
         listener: (context, state) {
         if(state is LoginSuccess){
            showSnackBar(context, "Login Success", Colors.green);
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>ReceptionScreen()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>isadoctor?DoctorHome(): ReceptionScreen()));
         }
         if(state is LoginFailure){
            showSnackBar(context, state.message, Colors.red);

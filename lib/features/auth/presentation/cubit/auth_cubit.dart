@@ -1,5 +1,6 @@
 
 
+import 'package:clinic/core/helpers/Cash_helper/shearedpref.dart';
 import 'package:clinic/features/auth/domain/usecases/login_usecase.dart';
 import 'package:clinic/features/auth/domain/usecases/register_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -25,6 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
    emit(LoginLoading());
    try{
     await loginUsecase(email,passowrd);
+    CashHelper.SaveData("is_logedin", true);
     emit(LoginSuccess());
    }catch(e){
     emit(LoginFailure(e.toString()));
