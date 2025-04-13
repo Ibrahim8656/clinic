@@ -59,4 +59,20 @@ class DoctorRepositoryimpl implements DoctorRepository {
       rethrow;
     }
   }
+  
+  @override
+  Future<List<Prescription>> getprescription({required int patientid}) async{
+ try{
+    final data = await _supabaseClient.from("prescription").select().eq('patinet_id', patientid);
+    return data.map((prescription) => Prescription.fromMap(prescription)).toList();
+  }catch(e){
+    print(e.toString());
+    rethrow;
+  }
+  }
+  
+
 }
+
+ 
+

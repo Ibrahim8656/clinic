@@ -10,96 +10,105 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isadoctor;
     return Scaffold(
-      backgroundColor: primarycolor,
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
+      
+      body: Container(
+        width: double.infinity,
+          decoration: BoxDecoration(
+            
+                gradient: LinearGradient(
+                  colors: [Colors.blue.shade300, const Color.fromARGB(255, 3, 58, 121)],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    children: [
-                      Container(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        height: MediaQuery.sizeOf(context).height * 0.45,
-                        width: MediaQuery.sizeOf(context).width * 0.3,
-                        child: Image.asset(
-                          "assets/images/logo.jpg",
-                          fit: BoxFit.cover,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(100),
-                            topRight: Radius.circular(100),
-                          ),
-                        ),
+                  Container(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    height: MediaQuery.sizeOf(context).height * 0.7,
+                    width: MediaQuery.sizeOf(context).width * 0.4,
+                    child: Image.asset(
+                      "assets/images/logo.jpg",
+                      fit: BoxFit.cover,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(150),
+                        topRight: Radius.circular(150),
                       ),
-                    ],
+                    ),
                   ),
-                  SizedBox(width: MediaQuery.sizeOf(context).width * 0.1),
-                  Column(
+                ],
+              ),
+              SizedBox(width: MediaQuery.sizeOf(context).width * 0.1),
+              Column(
+                
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: MediaQuery.sizeOf(context).height * 0.25,
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Welcome to Clinic assistant",
+                          style: TextStyle(
+                            fontSize:
+                                MediaQuery.sizeOf(context).width * 0.035,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.sizeOf(context).height * 0.2,
-                        ),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Welcome to Clinic assistant",
-                              style: TextStyle(
-                                fontSize:
-                                    MediaQuery.sizeOf(context).width * 0.035,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                              ),
+                      custom_botton(
+                        color: Colors.white,
+                        text: "Login as a doctor",
+                        onTap: () {
+                          isadoctor = true;
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) =>
+                                      Loginscreen(isadoctor: isadoctor),
                             ),
-                          ],
-                        ),
+                          );
+                        },
+                        
                       ),
-                      Row(
-                        children: [
-                          custom_botton(
-                            text: "Login as a doctor",
-                            onTap: () {
-                              isadoctor = true;
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) =>
-                                          Loginscreen(isadoctor: isadoctor),
-                                ),
-                              );
-                            },
-                            
-                          ),
-
-                          SizedBox(height: 20),
-                          custom_botton(
-                            text: "Login as a Reception",
-                            onTap: () {
-                              isadoctor = false;
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder:
-                                      (context) =>
-                                          Loginscreen(isadoctor: isadoctor),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
+              
+                      SizedBox(width: MediaQuery.sizeOf(context).width*.08),
+                      custom_botton(
+                        color: Colors.white,
+                        text: "Login as a Reception",
+                        onTap: () {
+                          isadoctor = false;
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder:
+                                  (context) =>
+                                      Loginscreen(isadoctor: isadoctor),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
                 ],
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

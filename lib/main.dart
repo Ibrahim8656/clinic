@@ -1,11 +1,11 @@
 import 'package:clinic/core/blocobserver/bloc_observer.dart';
 import 'package:clinic/core/helpers/Cash_helper/shearedpref.dart';
 import 'package:clinic/core/strings/strings.dart';
-import 'package:clinic/features/auth/presentation/screens/loginscreen.dart';
 import 'package:clinic/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:clinic/features/doctor/data/repository/repository.dart';
 import 'package:clinic/features/doctor/domain/usecases/add_preparedprescription_usecase.dart';
 import 'package:clinic/features/doctor/domain/usecases/add_prescription_usecase.dart';
+import 'package:clinic/features/doctor/domain/usecases/get_patientprescripton.dart';
 import 'package:clinic/features/doctor/domain/usecases/get_prerpared_prescription.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
 import 'package:clinic/features/doctor/presentation/screens/doctor_home.dart';
@@ -35,16 +35,20 @@ class MyApp extends StatelessWidget {
 final bool is_logedin;
   @override
   Widget build(BuildContext context) {
+    print(is_logedin);
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (context) {
             final supabaseClient = Supabase.instance.client;
             return DoctorCubit(
+           
               AddPreparedprescriptionUsecase(
                 DoctorRepositoryimpl(supabaseClient),
               ),
               GetPrerparedPrescriptionUsecase(
+                DoctorRepositoryimpl(supabaseClient),
+              ),   GetPatientprescriptonusecase(
                 DoctorRepositoryimpl(supabaseClient),
               ),
               addPrescriptionUsecase: AddPrescriptionUsecase(
@@ -76,7 +80,7 @@ final bool is_logedin;
           },
         ),
       ],
-      child: MaterialApp(home:DoctorHome() ),
+      child: MaterialApp(home:WelcomeScreen() ),
     );
   }
 }

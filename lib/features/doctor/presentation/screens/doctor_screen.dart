@@ -1,11 +1,10 @@
 import 'package:clinic/core/colos/colors.dart';
 import 'package:clinic/core/widgets/box_.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
+import 'package:clinic/features/doctor/presentation/screens/patient_info.dart';
+import 'package:clinic/features/doctor/presentation/screens/visit_info.dart';
 import 'package:clinic/features/doctor/presentation/widgets/add_prepered_prescrioption.dart';
-import 'package:clinic/features/doctor/presentation/widgets/add_prescription.dart';
 import 'package:clinic/features/doctor/presentation/widgets/patientinfo_more.dart';
-import 'package:clinic/features/doctor/presentation/widgets/prepeard_prescriptions.dart';
-import 'package:clinic/features/doctor/presentation/widgets/table.dart';
 import 'package:clinic/features/reception/domain/entity/appointment.dart';
 
 import 'package:flutter/material.dart';
@@ -57,7 +56,9 @@ class DoctorScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(25.0),
+                padding: EdgeInsets.all(
+                  MediaQuery.sizeOf(context).width * 0.02,
+                ),
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: patientinfoandmore(
@@ -77,7 +78,9 @@ class DoctorScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          SizedBox(width: 15),
+                          SizedBox(
+                            width: MediaQuery.sizeOf(context).width * .05,
+                          ),
 
                           InkWell(
                             onTap: () {
@@ -94,12 +97,18 @@ class DoctorScreen extends StatelessWidget {
                                       : primarycolor,
                             ),
                           ),
-                          SizedBox(width: 50),
+                          SizedBox(
+                            width: MediaQuery.sizeOf(context).width * .05,
+                          ),
                           InkWell(
                             onTap: () {
                               DoctorCubit.get(
                                 context,
                               ).changing_info(ispatientinfoo: true);
+                              DoctorCubit.get(
+                                context,
+                              ).GetPatientprescripton(patinet_id: patient.id);
+
                               print(DoctorCubit.get(context).ispatientinfo);
                             },
                             child: box(
@@ -123,130 +132,12 @@ class DoctorScreen extends StatelessWidget {
                 ),
               ),
               DoctorCubit.get(context).ispatientinfo
-                  ? Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Image(
-                              image: AssetImage("assets/images/person.jpg"),
-                              width: MediaQuery.sizeOf(context).width * .1,
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: 30),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            pationt_info_item(
-                              title: 'Name',
-                              data: patient.name,
-                            ),
-                            divider(),
-                            pationt_info_item(
-                              title: 'Age',
-                              data: patient.age.toString(),
-                            ),
-                            divider(),
-                            pationt_info_item(title: 'Job', data: patient.job),
-                            divider(),
-                            pationt_info_item(
-                              title: 'Gender',
-                              data: patient.gender,
-                            ),
-                            divider(),
-                            pationt_info_item(
-                              title: 'Phone',
-                              data: patient.phone,
-                            ),
-                            divider(),
-                            pationt_info_item(
-                              title: 'Address',
-                              data: patient.address,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                  : Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        prepeared_prescriptons(),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20.0),
-                          child: add_prescription(
-                            context: context,
-                            medicines: medicines,
-                            patinet_id: patient.id,
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        prescription_table(),
-                      ],
-                    ),
-                  ),
+                  ? patient_info(patient: patient)
+                  : visit_info(medicines: medicines, patient: patient),
             ],
           ),
         );
       },
-    );
-  }
-}
-
-class divider extends StatelessWidget {
-  const divider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: Container(
-        width: MediaQuery.sizeOf(context).width * .5,
-        color: Colors.grey,
-        child: SizedBox(height: 1),
-      ),
-    );
-  }
-}
-
-class pationt_info_item extends StatelessWidget {
-  const pationt_info_item({super.key, required this.title, required this.data});
-  final String title;
-  final String data;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        children: [
-          SizedBox(
-            width: 100,
-            child: Text(
-              title,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: const Color.fromARGB(255, 131, 131, 131),
-              ),
-            ),
-          ),
-          SizedBox(width: 15),
-          Text(
-            data,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: const Color.fromARGB(255, 44, 44, 44),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -23,14 +23,20 @@ class RegisterPage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.blue.shade300, Colors.blue.shade800],
+              colors: [
+                Colors.blue.shade300,
+                const Color.fromARGB(255, 3, 58, 121),
+              ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
           ),
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 120),
+              padding: const EdgeInsets.symmetric(
+                vertical: 100,
+                horizontal: 120,
+              ),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16.0),
@@ -50,15 +56,15 @@ class RegisterPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                       Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue.shade700,
-                              ),
-                            ),
-                            SizedBox(height: 30),
+                      Text(
+                        'Sign Up',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blue.shade700,
+                        ),
+                      ),
+                      SizedBox(height: 30),
                       SizedBox(height: 20),
                       custom_text_fild(
                         Controller: _emailController,
@@ -85,7 +91,8 @@ class RegisterPage extends StatelessWidget {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => Loginscreen(isadoctor: false,),
+                                builder:
+                                    (context) => Loginscreen(isadoctor: false),
                               ),
                             );
                           } else if (state is AuthFailure) {

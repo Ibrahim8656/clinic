@@ -59,3 +59,18 @@ class ErrorFetchPreparedprescriptionstate extends DoctorState{
 
 }
 class CollectPreparedprescriptionState extends DoctorState{}
+
+class GetprescriptionLoadingState extends DoctorState{}
+class GetprescriptionSuccessState extends DoctorState{
+  final List<String> treatments;
+  final List<String> dosages;
+  final List<String> notes;
+
+  GetprescriptionSuccessState( this.treatments, this.dosages, this.notes);
+}
+class GetprescriptionErrorState extends DoctorState{
+  final String errormessage;
+
+  GetprescriptionErrorState(this.errormessage);
+
+}

@@ -4,6 +4,7 @@ import 'package:clinic/core/widgets/patient_info.dart';
 import 'package:clinic/features/doctor/domain/entity/prescription.dart';
 import 'package:clinic/features/doctor/domain/usecases/add_preparedprescription_usecase.dart';
 import 'package:clinic/features/doctor/domain/usecases/add_prescription_usecase.dart';
+import 'package:clinic/features/doctor/domain/usecases/get_patientprescripton.dart';
 import 'package:clinic/features/doctor/domain/usecases/get_prerpared_prescription.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,9 +16,10 @@ class DoctorCubit extends Cubit<DoctorState> {
   final AddPrescriptionUsecase addPrescriptionUsecase;
   final AddPreparedprescriptionUsecase addPreparedprescriptionUsecase;
   final GetPrerparedPrescriptionUsecase getPrerparedPrescriptionUsecase;
+  final GetPatientprescriptonusecase getPatientprescripton;
   DoctorCubit(
     this.addPreparedprescriptionUsecase,
-    this.getPrerparedPrescriptionUsecase, {
+    this.getPrerparedPrescriptionUsecase, this.getPatientprescripton, {
     required this.addPrescriptionUsecase,
   }) : super(DoctorInitial());
   static DoctorCubit get(context) => BlocProvider.of(context);
@@ -134,7 +136,7 @@ class DoctorCubit extends Cubit<DoctorState> {
       patinet_id: patinet_id,
       treatment: treatmenttosave,
       doasage: dosagetosave,
-      note: note ?? "",
+      note: note 
     );
     print(treatmenttosave);
     treatmenttosave = '';
@@ -203,5 +205,28 @@ class DoctorCubit extends Cubit<DoctorState> {
       print(error.toString());
       emit(ErrorFetchPreparedprescriptionstate(error.toString()));
     }
+  }
+ 
+ int vesitnumber=1;
+  Future<void> GetPatientprescripton({required patinet_id}) async {
+    emit(GetprescriptionLoadingState());
+    try{
+      final prescriptions = await getPatientprescripton.execute(patinet_id: patinet_id);
+      vesitnumber=prescriptions.length;
+      List<String> treatmentList = [];
+      List<String> doasageList = [];
+      List<String> notelist = [];
+      for( var i in prescriptions){
+        treatmentList.add(i.treatment);
+        doasageList.add(i.doasage);
+        notelist.add(i.note);
+      }
+      emit(GetprescriptionSuccessState(treatmentList,doasageList,notelist));
+    }catch(error){
+      print(error.toString());
+      emit(GetprescriptionErrorState(error.toString()));
+    }
+
+
   }
 }

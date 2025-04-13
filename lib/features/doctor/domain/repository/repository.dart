@@ -7,4 +7,5 @@ abstract class DoctorRepository{
   Future<void>add_prescription({required Prescription prescription});
   Future<void>add_preparedprescription({required PreparedPrescription preparedPrescription});
   Future<List<PreparedPrescription>>getpreparedprescription();
+  Future<List<Prescription>>getprescription({required int patientid});
 }

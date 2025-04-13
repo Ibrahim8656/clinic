@@ -1,4 +1,5 @@
 import 'package:clinic/core/widgets/custom_bottom.dart';
+import 'package:clinic/core/widgets/show_snack_bar.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
@@ -107,13 +108,14 @@ Row add_prescription({
       custom_botton(
         text: " save ",
         onTap: () {
-          print("hiiiiiiiiiiiiiiiiiii${DoctorCubit.get(context).treatmenttosave}");
           DoctorCubit.get(context).add_prescriptiontodatabase(
             patinet_id: patinet_id,
             treatmenttosave: DoctorCubit.get(context).treatmenttosave,
             doasage:DoctorCubit.get(context). dosagetosave,
             note: DoctorCubit.get(context).Notecontroller.text,
           );
+           DoctorCubit.get(context).DeletePrescriptiondatat();
+           showSnackBar(context, "Added successfully", Colors.green);
         },
       ),
     ],

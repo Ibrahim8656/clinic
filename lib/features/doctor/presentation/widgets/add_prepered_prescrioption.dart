@@ -1,5 +1,4 @@
 import 'package:clinic/core/widgets/custom_bottom.dart';
-import 'package:clinic/core/widgets/custom_text_fild.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,7 +13,7 @@ class addpreparedprescripton extends StatelessWidget {
     final dosageController = TextEditingController();
     final noteController = TextEditingController();
     return custom_botton(
-      text: 'Add a prepared recipe ',
+      text: 'Add a prepared prescription',
       onTap: () {
         showDialog(
           context: context,

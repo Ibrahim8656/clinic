@@ -21,6 +21,7 @@ class patientinfoandmore extends StatelessWidget {
       children: [
          IconButton(onPressed: (){
              DoctorCubit.get(context).DeletePrescriptiondatat();
+             DoctorCubit.get(context).vesitnumber=0;
                 Navigator.pop(context);
                }, icon:  Icon(Icons.arrow_back,color: primarycolor,),),
                SizedBox(width: 15,),
@@ -54,11 +55,11 @@ class patientinfoandmore extends StatelessWidget {
           ),
         ),
         SizedBox(width: 20),
-        row_box(first_text: 'Visit number', second_text: '2'),
+        row_box(first_text: 'Visit number', second_text: '${DoctorCubit.get(context).vesitnumber+1}'),
         SizedBox(width: 20),
         row_box(
           first_text: 'Visit type',
-          second_text: patient.veisit_type,
+          second_text: DoctorCubit.get(context).vesitnumber+1 ==1? 'First visit' : 'Follow up',
         ),
         SizedBox(width: 20),
         row_box(

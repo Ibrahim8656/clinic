@@ -17,8 +17,8 @@ final Color color;
       borderRadius: BorderRadius.circular(5),
     ),
     child: Padding(
-      padding: const EdgeInsets.all(8.0),
-      child:   Text(first_text,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.white),)
+      padding:  EdgeInsets.all(MediaQuery.sizeOf(context).width * 0.008,),
+      child:   Text(first_text,style: TextStyle(fontSize: MediaQuery.sizeOf(context).width*.01,fontWeight: FontWeight.bold,color: Colors.white),)
     ),);
   }
 }

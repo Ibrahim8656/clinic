@@ -1,4 +1,3 @@
-import 'package:clinic/core/colos/colors.dart';
 import 'package:clinic/features/doctor/presentation/cubit/doctor_cubit.dart';
 import 'package:flutter/material.dart';
 

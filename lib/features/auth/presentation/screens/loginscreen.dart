@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Loginscreen extends StatelessWidget {
-  const Loginscreen({super.key, required this.isadoctor, });
+  const Loginscreen({super.key, required this.isadoctor});
   final bool isadoctor;
   @override
   Widget build(BuildContext context) {
@@ -25,35 +25,50 @@ class Loginscreen extends StatelessWidget {
           ),
       child: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-        if(state is LoginSuccess){
-           showSnackBar(context, "Login Success", Colors.green);
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>isadoctor?DoctorHome(): ReceptionScreen()));
-        }
-        if(state is LoginFailure){
-           showSnackBar(context, state.message, Colors.red);
-        }
+          if (state is LoginSuccess) {
+            showSnackBar(context, "Login Success", Colors.green);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder:
+                    (context) => isadoctor ? DoctorHome() : ReceptionScreen(),
+              ),
+            );
+          }
+          if (state is LoginFailure) {
+            showSnackBar(context, state.message, Colors.red);
+          }
         },
         builder: (context, state) {
           return Scaffold(
             body: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue.shade300, Colors.blue.shade800],
+                  colors: [
+                    Colors.blue.shade300,
+                    const Color.fromARGB(255, 3, 58, 121),
+                  ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
               ),
               child: Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 120),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 100,
+                    horizontal: 120,
+                  ),
                   child: Card(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16.0),
                     ),
                     elevation: 8,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 100.0,vertical: 50),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 100.0,
+                        vertical: 50,
+                      ),
                       child: Form(
                         key: _formKey,
                         child: Column(
@@ -95,7 +110,7 @@ class Loginscreen extends StatelessWidget {
                               obscureText: true,
                               validatemessage: 'Plase enter Passowrd',
                             ),
-                            SizedBox(height: 30,),
+                            SizedBox(height: 30),
 
                             TextButton(
                               onPressed: () {
