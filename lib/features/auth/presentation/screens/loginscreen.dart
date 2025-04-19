@@ -6,6 +6,7 @@ import 'package:clinic/features/auth/domain/usecases/register_usecase.dart';
 import 'package:clinic/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:clinic/features/doctor/presentation/screens/doctor_home.dart';
 import 'package:clinic/features/reception/presentation/screens/reception_screen.dart';
+import 'package:clinic/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -88,7 +89,7 @@ class Loginscreen extends StatelessWidget {
 
                             // Title
                             Text(
-                              'Sign In',
+                              S.of(context).login,
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -98,17 +99,17 @@ class Loginscreen extends StatelessWidget {
                             SizedBox(height: 30),
                             custom_text_fild(
                               Controller: _emailController,
-                              labelText: "email",
+                              labelText: S.of(context).email,
                               prefixIcon: Icons.person,
-                              validatemessage: 'Plase enter email',
+                              validatemessage: S.of(context).validatemailemessage,
                             ),
                             SizedBox(height: 20),
                             custom_text_fild(
                               Controller: _passwordController,
-                              labelText: "Passowrd",
+                              labelText: S.of(context).password,
                               prefixIcon: Icons.lock,
                               obscureText: true,
-                              validatemessage: 'Plase enter Passowrd',
+                              validatemessage:S.of(context).validpasswordmessage,
                             ),
                             SizedBox(height: 30),
 
@@ -123,7 +124,7 @@ class Loginscreen extends StatelessWidget {
                               },
                               child: Center(
                                 child: Text(
-                                  'LOGIN',
+                                  S.of(context).login,
                                   style: TextStyle(
                                     color: Colors.blue,
                                     fontWeight: FontWeight.bold,

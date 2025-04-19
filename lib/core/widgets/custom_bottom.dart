@@ -23,13 +23,13 @@ class custom_botton extends StatelessWidget {
         ),
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(MediaQuery.sizeOf(context).width * 0.006),
+            padding: EdgeInsets.all(MediaQuery.sizeOf(context).width * 0.01),
             child: Text(
               text,
               style: TextStyle(
                 color: color != null ? primarycolor : Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: MediaQuery.sizeOf(context).width * .015,
+                fontSize: MediaQuery.sizeOf(context).width * .010,
               ),
             ),
           ),

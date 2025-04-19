@@ -1,0 +1,13 @@
+{
+    "locale": "ar",
+    "appTitle": "عياده",
+    "welcomeMessage": "مرحبا بك في عيادتك",
+    "loginasdoctor": "تسجيل الدخول كطبيب",
+    "loginasreceptionist": "تسجيل الدخول كموظف ",
+     "login": "تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "validatemailemessage": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "validpasswordmessage": "كلمة مرور خاطئة",
+    "language":"اللغه"
+}

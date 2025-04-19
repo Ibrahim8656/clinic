@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:clinic/core/helpers/Cash_helper/shearedpref.dart';
 import 'package:clinic/core/widgets/add_prescription.dart';
 import 'package:clinic/core/widgets/patient_info.dart';
 import 'package:clinic/features/doctor/domain/entity/prescription.dart';
@@ -8,6 +9,7 @@ import 'package:clinic/features/doctor/domain/usecases/get_patientprescripton.da
 import 'package:clinic/features/doctor/domain/usecases/get_prerpared_prescription.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'doctor_state.dart';

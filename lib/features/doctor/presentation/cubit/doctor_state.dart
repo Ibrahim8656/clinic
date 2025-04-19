@@ -22,6 +22,12 @@ class AddTreatmentfailuer extends DoctorState {
 
 class DeleteTreatmentLoading extends DoctorState {}
 class DeleteTreatmentsuccess extends DoctorState {}
+class selectlanguageStateLoading extends DoctorState {}
+class selectlanguageState extends DoctorState {
+  final String languageCode;
+  selectlanguageState({required this.languageCode});
+}
+class selectlanguageStateError extends DoctorState {}
 
 class DeleteTreatmentfailuer extends DoctorState {
   final String errormessage;

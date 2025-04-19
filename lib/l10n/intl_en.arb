@@ -1,0 +1,16 @@
+{
+    "locale": "en",
+    "appTitle": "My Application",
+    "welcomeMessage": "Welcome to Clinic assesstatnt",
+   "loginasdoctor": "Login as Doctor",
+   "loginasreceptionist": "Login as Receptionist",
+   "login": "Login",
+    "email": "Email",
+    "password": "Password",
+    "validatemailemessage": "Please enter a valid email address",
+    "validpasswordmessage": "wrong password",
+    "language":"language"
+
+    
+
+}
